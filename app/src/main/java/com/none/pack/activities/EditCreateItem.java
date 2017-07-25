@@ -1,13 +1,19 @@
-package com.none.pack;
+package com.none.pack.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.none.pack.itemModels.Item;
+import com.none.pack.R;
 
 import java.lang.Integer;
 
@@ -29,7 +35,6 @@ public class EditCreateItem extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        Button button = (Button) findViewById(R.id.save_create_button);
         name= (EditText) findViewById(R.id.ItemName);
         weightPounds = (EditText) findViewById(R.id.ItemPounds);
         weightDecimal = (EditText) findViewById(R.id.ItemDecimal);
@@ -45,9 +50,8 @@ public class EditCreateItem extends AppCompatActivity {
         else if(mode.equals("Edit")) {
             Log.d("CreateItem", "Edit Item mode detected");
 
-            button.setText("Save Changes");
             Log.d("CreateItem","Changed Item text");
-            item = Item.getItemFromIntent(intent);
+            item = new Item(intent);
             Log.d("CreateItem","Got Item " + item.toString()+" with ID "+item.getId());
             name.setText(item.getName());
             weightPounds.setText(String.format("%d",item.getWeight().getPounds()));
@@ -58,7 +62,7 @@ public class EditCreateItem extends AppCompatActivity {
         }
     }
 
-    public void attemptFinish(View view) {
+    public void attemptFinish() {
         Log.d("CreateItem","AttemptFinish Launched, attempting try block");
         Item newItem;
         try {
@@ -101,5 +105,22 @@ public class EditCreateItem extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.item_edit_actions, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.action_finish:
+                attemptFinish();
+                break;
+        }
+        return true;
     }
 }

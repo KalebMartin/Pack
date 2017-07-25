@@ -7,6 +7,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.none.pack.itemModels.Item;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +62,7 @@ public class ItemsDataSource {
      */
     public Item createItem(Item item) {
         ContentValues values = new ContentValues();
+        values.put(ItemDatabaseHelper.getKeyType(),item.getType());
         values.put(ItemDatabaseHelper.getKeyName(),item.getName());
         values.put(ItemDatabaseHelper.getKeyPounds(),item.getWeight().getPounds());
         values.put(ItemDatabaseHelper.getKeyDecimal(),item.getWeight().getDecimal());
@@ -81,6 +84,7 @@ public class ItemsDataSource {
      */
     public Item updateItem(Item item) {
         ContentValues values = new ContentValues();
+        values.put(ItemDatabaseHelper.getKeyType(),item.getType());
         values.put(ItemDatabaseHelper.getKeyName(),item.getName());
         values.put(ItemDatabaseHelper.getKeyPounds(),item.getWeight().getPounds());
         values.put(ItemDatabaseHelper.getKeyDecimal(),item.getWeight().getDecimal());
@@ -128,6 +132,11 @@ public class ItemsDataSource {
         return items;
     }
 
+    /**
+     * Converts given cursor value to an item
+     * @param cursor - cursor with Item in database
+     * @return Item that the cursor is pointing to
+     */
     private Item cursorToItem(Cursor cursor) {
         String name = cursor.getString(1);
         int pounds = cursor.getInt(2);

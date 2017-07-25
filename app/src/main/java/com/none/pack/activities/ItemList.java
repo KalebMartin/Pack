@@ -1,14 +1,16 @@
-package com.none.pack;
+package com.none.pack.activities;
 
 import android.app.ListActivity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.none.pack.itemModels.Item;
+import com.none.pack.ItemAdapter;
+import com.none.pack.ItemsDataSource;
+import com.none.pack.R;
 
 import java.util.List;
 
@@ -47,14 +49,6 @@ public class ItemList extends ListActivity {
         super.onPause();
     }
 
-    public void addTestItem(View view) {
-        ItemAdapter adapter = (ItemAdapter) getListAdapter();
-        Item item = new Item("Sword",5,0,1,"Basic sword");
-        adapter.add(datasource.createItem(item));
-        adapter.notifyDataSetChanged();
-
-    }
-
     public void addNewItem(View view) {
         Intent createItem = new Intent(this,EditCreateItem.class);
         createItem.putExtra("createPurpose", "Create");
@@ -75,7 +69,7 @@ public class ItemList extends ListActivity {
         /* Item Delete or Edit Request */
         if(requestCode==1) {
             if(resultCode==RESULT_OK) {
-                Item item = Item.getItemFromIntent(data);
+                Item item = new Item(data);
                 if(item!=null) {
                     if(data.getStringExtra("operation").equals("delete")) {
                         datasource.open();
@@ -94,8 +88,9 @@ public class ItemList extends ListActivity {
                     }
                 }
             }
-            else if(resultCode==RESULT_CANCELED) {
 
+            else if(resultCode==RESULT_CANCELED) {
+                //Resume operation as normal
             }
         }
         /* Item Create Request */
@@ -107,7 +102,7 @@ public class ItemList extends ListActivity {
                 Log.d("ItemList",data.getIntExtra("decimal",0)+"");
                 Log.d("ItemList",data.getIntExtra("quantity",0)+"");
                 Log.d("ItemList",data.getStringExtra("description"));
-                Item item = Item.getItemFromIntent(data);
+                Item item = new Item(data);
                 if(item!=null) {
                     datasource.open();
                     Log.d("ItemList", "Data retrieved?");

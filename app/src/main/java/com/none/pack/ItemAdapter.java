@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.none.pack.itemModels.Item;
+
 import java.util.List;
 
 /**
@@ -72,7 +74,7 @@ public class ItemAdapter extends BaseAdapter {
         Item item = (Item) getItem(position);
         nameText.setText(item.getName());
         weightText.setText(item.getWeightTotal().displayWeight());
-        itemIcon.setImageResource(R.drawable.ic_armoricon);
+        itemIcon.setImageResource(item.getIcon());
         return rowView;
     }
 

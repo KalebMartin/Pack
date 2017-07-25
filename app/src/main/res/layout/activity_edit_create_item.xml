@@ -1,37 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.none.pack.EditCreateItem">
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    tools:context="com.none.pack.activities.EditCreateItem">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Item Name"/>
+            android:text="@string/item_name"/>
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:maxLength="50"
             android:inputType="text"
+            android:imeOptions="actionNext"
             android:id="@+id/ItemName"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Quantity"
+            android:text="@string/attribute_quantity"
             android:gravity="center" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
+            android:imeOptions="actionNext"
             android:gravity="center"
             android:text="1"
             android:id="@+id/ItemQuantity"
@@ -40,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Weight"/>
+            android:text="@string/attribute_weight"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -49,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:inputType="number"
+                android:imeOptions="actionNext"
                 android:gravity="right"
                 android:text="0"
                 android:id="@+id/ItemPounds"/>
@@ -63,6 +61,7 @@
                 android:gravity="left"
                 android:layout_weight="2"
                 android:inputType="number"
+                android:imeOptions="actionNext"
                 android:text="00"
                 android:maxLength="2"
                 android:id="@+id/ItemDecimal"
@@ -70,13 +69,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="lbs"/>
+                android:text="@string/unit_abbr"/>
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Description"/>
+            android:text="@string/attribute_description"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,20 +83,4 @@
             android:id="@+id/ItemDescription"
             />
 
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Create"
-            android:id="@+id/save_create_button"
-            android:onClick="attemptFinish"/>
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

@@ -11,23 +11,27 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class ItemDatabaseHelper extends SQLiteOpenHelper {
     private static String TABLE_NAME = "items";
+    private static final String KEY_TYPE = "type";
     private static final String COLUMN_ID = "item_id";
     private static final String KEY_NAME = "name";
     private static final String KEY_POUNDS = "pounds";
     private static final String KEY_DECIMAL = "decimal";
     private static final String KEY_QUANTITY = "quantity";
     private static final String KEY_DESCRIPTION= "description";
+    private static final String KEY_EXTRA = "extra";
 
     private static String DATABASE_NAME = "items.db";
 
     private static final String DATABASE_TABLE_CREATE =
             "CREATE TABLE " + TABLE_NAME + "( " +
-                    COLUMN_ID+" integer PRIMARY KEY AUTOINCREMENT, " +
+                    KEY_TYPE + " integer, " +
+                    COLUMN_ID+ " integer PRIMARY KEY AUTOINCREMENT, " +
                     KEY_NAME + " text, " +
                     KEY_POUNDS + " integer, " +
                     KEY_DECIMAL + " integer, " +
                     KEY_QUANTITY + " integer, " +
-                    KEY_DESCRIPTION + " text);";
+                    KEY_DESCRIPTION + " text, " +
+                    KEY_EXTRA + " text);";
 
 
     /**
@@ -69,6 +73,12 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS item");
         onCreate(db);
     }
+
+    /**
+     *
+     * @return The Key description for the type column
+     */
+    public static String getKeyType() { return KEY_TYPE; }
 
     /**
      *
@@ -125,6 +135,12 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
     public static String getKeyDescription() {
         return KEY_DESCRIPTION;
     }
+
+    /**
+     *
+     * @return The Key description for the extra column
+     */
+    public static String getKeyExtra() { return KEY_EXTRA; }
 
     /**
      *

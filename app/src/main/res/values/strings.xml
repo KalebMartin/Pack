@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">Pack</string>
     <string name="thumbnail">Thumbnail</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_finish">Finish</string>
+    <string name="attribute_name">Name</string>
+    <string name="attribute_quantity">Quantity</string>
+    <string name="attribute_weight">Weight</string>
+    <string name="attribute_weight_total">Total Weight</string>
+    <string name="attribute_description">Description</string>
+    <string name="title_activity_some">SomeActivity</string>
+    <string name="new_item">New Item</string>
+    <string name="item_name">Item Name</string>
+    <string name="unit_abbr">lbs</string>
+
 </resources>

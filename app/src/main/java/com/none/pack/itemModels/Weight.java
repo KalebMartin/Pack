@@ -1,4 +1,4 @@
-package com.none.pack;
+package com.none.pack.itemModels;
 
 /**
  * Weight class

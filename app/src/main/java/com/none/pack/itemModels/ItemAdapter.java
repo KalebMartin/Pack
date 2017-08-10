@@ -1,4 +1,4 @@
-package com.none.pack;
+package com.none.pack.itemModels;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,8 +9,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.none.pack.R;
 import com.none.pack.itemModels.Item;
+import com.none.pack.itemModels.ItemComparator;
+import com.none.pack.itemModels.SortParameter;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -118,5 +122,9 @@ public class ItemAdapter extends BaseAdapter {
                 break;
             }
         }
+    }
+
+    public void sortList(SortParameter[] sortParams) {
+        Collections.sort(datasource,new ItemComparator(sortParams));
     }
 }

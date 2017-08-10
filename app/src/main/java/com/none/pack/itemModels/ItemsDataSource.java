@@ -1,4 +1,4 @@
-package com.none.pack;
+package com.none.pack.itemModels;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.none.pack.itemModels.Item;
+import com.none.pack.itemModels.ItemDatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +20,10 @@ import java.util.List;
 public class ItemsDataSource {
     private SQLiteDatabase database;
     private ItemDatabaseHelper helper;
-    private String[] allColumns= {ItemDatabaseHelper.getColumnId(), ItemDatabaseHelper.getKeyName(),
-            ItemDatabaseHelper.getKeyPounds(), ItemDatabaseHelper.getKeyDecimal(),
-            ItemDatabaseHelper.getKeyQuantity(), ItemDatabaseHelper.getKeyDescription()};
+    private String[] allColumns= {ItemDatabaseHelper.getColumnId(), ItemDatabaseHelper.getKeyType(),
+            ItemDatabaseHelper.getKeyName(), ItemDatabaseHelper.getKeyPounds(),
+            ItemDatabaseHelper.getKeyDecimal(), ItemDatabaseHelper.getKeyQuantity(),
+            ItemDatabaseHelper.getKeyDescription()};
 
     /**
      * Default Constructor - Calls Database Helper for creation
@@ -138,12 +140,13 @@ public class ItemsDataSource {
      * @return Item that the cursor is pointing to
      */
     private Item cursorToItem(Cursor cursor) {
-        String name = cursor.getString(1);
-        int pounds = cursor.getInt(2);
-        int decimal = cursor.getInt(3);
-        int quantity = cursor.getInt(4);
-        String description = cursor.getString(5);
-        Item newItem = new Item(name,pounds,decimal,quantity,description);
+        int type = cursor.getInt(1);
+        String name = cursor.getString(2);
+        int pounds = cursor.getInt(3);
+        int decimal = cursor.getInt(4);
+        int quantity = cursor.getInt(5);
+        String description = cursor.getString(6);
+        Item newItem = new Item(type,name,pounds,decimal,quantity,description);
         newItem.setId(cursor.getLong(0));
         return newItem;
     }

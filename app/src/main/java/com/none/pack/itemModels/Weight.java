@@ -155,15 +155,15 @@ public class Weight {
      * @param otherWeight the weight to be compared against
      * @return true if heavier, false if equal or lighter weight
      */
-    public boolean isHeavierThan(Weight otherWeight) {
+    public int compareTo(Weight otherWeight) {
         if(pounds>otherWeight.getPounds()) {
-            return true;
+            return 1;
         }
         else if(pounds==otherWeight.getPounds()) {
-            return decimal > otherWeight.getDecimal();
+            return decimal-otherWeight.getDecimal();
         }
         else {
-            return false;
+            return -1;
         }
     }
 

@@ -1,5 +1,6 @@
 package com.none.pack.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -11,13 +12,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
+import com.none.pack.SpinnerVectorAdapter;
 import com.none.pack.itemModels.Item;
 import com.none.pack.R;
 
 import java.lang.Integer;
 
 public class EditCreateItem extends AppCompatActivity {
+    private Spinner type;
     private Item item;
     private EditText name;
     private EditText weightPounds;
@@ -25,6 +29,13 @@ public class EditCreateItem extends AppCompatActivity {
     private EditText quantity;
     private EditText description;
     private String mode;
+
+    private static Integer[] typeIcons = {R.drawable.ic_genericicon, R.drawable.ic_armoricon,
+    R.drawable.ic_armoricon2, R.drawable.ic_armoricon3, R.drawable.ic_weaponicon,
+    R.drawable.ic_weaponicon2, R.drawable.ic_arrowicon, R.drawable.ic_quivericon,
+    R.drawable.ic_foodicon, R.drawable.ic_potionicon, R.drawable.ic_pouchicon,
+    R.drawable.ic_coinicon, R.drawable.ic_gemicon, R.drawable.ic_articon,
+    R.drawable.ic_specialicon} ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +46,9 @@ public class EditCreateItem extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+        type = (Spinner) findViewById(R.id.type_select_spinner);
+        SpinnerVectorAdapter adapter = new SpinnerVectorAdapter(this,typeIcons);
+        type.setAdapter(adapter);
         name= (EditText) findViewById(R.id.ItemName);
         weightPounds = (EditText) findViewById(R.id.ItemPounds);
         weightDecimal = (EditText) findViewById(R.id.ItemDecimal);
@@ -58,6 +72,7 @@ public class EditCreateItem extends AppCompatActivity {
             weightDecimal.setText(item.getWeight().displayDecimal());
             quantity.setText(String.format("%d",item.getQuantity()));
             description.setText(item.getDescription());
+            type.setSelection(item.getType()-1);
             Log.d("CreateItem","EditTexts changed to item values");
         }
     }
@@ -73,7 +88,8 @@ public class EditCreateItem extends AppCompatActivity {
             if(weightDecimal.getText().toString().length()==1) {
                 weightDecimal.setText(weightDecimal.getText().toString()+"0");
             }
-            newItem = new Item(name.getText().toString(),
+            newItem = new Item(type.getSelectedItemPosition()+1,
+                    name.getText().toString(),
                     Integer.parseInt(weightPounds.getText().toString()),
                     Integer.parseInt(weightDecimal.getText().toString()),
                     Integer.parseInt(quantity.getText().toString()),

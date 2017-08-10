@@ -6,6 +6,18 @@
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.none.pack.activities.EditCreateItem">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Type"/>
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/type_select_spinner">
+
+    </Spinner>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

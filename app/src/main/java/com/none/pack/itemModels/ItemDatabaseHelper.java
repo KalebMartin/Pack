@@ -1,5 +1,4 @@
-package com.none.pack;
-import android.content.ContentValues;
+package com.none.pack.itemModels;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -11,27 +10,25 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class ItemDatabaseHelper extends SQLiteOpenHelper {
     private static String TABLE_NAME = "items";
-    private static final String KEY_TYPE = "type";
+    private static final String KEY_TYPE = "item_type";
     private static final String COLUMN_ID = "item_id";
     private static final String KEY_NAME = "name";
     private static final String KEY_POUNDS = "pounds";
     private static final String KEY_DECIMAL = "decimal";
     private static final String KEY_QUANTITY = "quantity";
     private static final String KEY_DESCRIPTION= "description";
-    private static final String KEY_EXTRA = "extra";
 
     private static String DATABASE_NAME = "items.db";
 
     private static final String DATABASE_TABLE_CREATE =
             "CREATE TABLE " + TABLE_NAME + "( " +
-                    KEY_TYPE + " integer, " +
                     COLUMN_ID+ " integer PRIMARY KEY AUTOINCREMENT, " +
+                    KEY_TYPE + " integer, " +
                     KEY_NAME + " text, " +
                     KEY_POUNDS + " integer, " +
                     KEY_DECIMAL + " integer, " +
                     KEY_QUANTITY + " integer, " +
-                    KEY_DESCRIPTION + " text, " +
-                    KEY_EXTRA + " text);";
+                    KEY_DESCRIPTION + " text);";
 
 
     /**
@@ -45,7 +42,7 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
 
     /**
      * Constuctor for creating a databse using the bag's name as the database title
-     * @param context
+     * @param context Context in which database is being used
      * @param bagName Name of the database
      */
     public ItemDatabaseHelper(Context context, String bagName) {
@@ -55,7 +52,7 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
 
     /**
      * Overriden on Create Method - Will create the database using the creation string
-     * @param db
+     * @param db Database being created
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -135,12 +132,6 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
     public static String getKeyDescription() {
         return KEY_DESCRIPTION;
     }
-
-    /**
-     *
-     * @return The Key description for the extra column
-     */
-    public static String getKeyExtra() { return KEY_EXTRA; }
 
     /**
      *

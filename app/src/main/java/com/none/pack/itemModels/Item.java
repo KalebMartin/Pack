@@ -6,8 +6,8 @@ import android.content.Intent;
 import com.none.pack.R;
 
 /**
- * Base Item Class
- * For handling generic/unspecified items
+ * Item Class
+ * Holds and handles all item information
  *
  * @author Kaleb
  * @version 1.0
@@ -20,25 +20,29 @@ public class Item {
     Type of item - used to distinguish what icon the item should have
 
     Type -  Icon
-    1 - Generic
-    2 - Pouch
-    3 - Coins
-    4 - Helmet
-    5 - Shield
-    6 - Body Armor
-    7 - Melee
-    8 - Ranged
-    9 - Special
-    10 - Vial
-    11 - Food
-    12 - Arrow
-    13 - Quiver
-    14 - Gem
-    15 - Art Object
+     1 - Generic
+     2 - Helmet
+     3 - Shield
+     4 - Body Armor
+     5 - Melee Weapon
+     6 - Ranged Weapon
+     7 - Arrows
+     8 - Quiver
+     9 - Food
+     10 - Vial
+     11 - Pouch
+     12 - Coins
+     13 - Gem
+     14 - Art Object
+     15 - Special
 
-     All others should be detected as invalid - return either bug or
+     All others should be detected as invalid - item should then be reset as generic
      */
     private int type;
+    /**
+     *
+     */
+    private final int MAX_TYPE = 15;
     /**
      *     Unique ID given by database - should be set immediately after SQL insertion
       */
@@ -76,25 +80,24 @@ public class Item {
      */
     public Item(Intent intent) {
         getItemFromIntent(intent);
-        type = 1;
         findWeightTotal();
     }
 
     /**
      * Standard constructor for new Item
-     * @param inName
-     * @param weightPound
-     * @param weightDecimal
-     * @param inQuantity
-     * @param inDescription
+     * @param inName name of new item
+     * @param weightPound int of the pound value of the constructor
+     * @param weightDecimal int of the decimal value of the constructor
+     * @param inQuantity int quantity of the new item
+     * @param inDescription the description of the new item
      */
-    public Item(String inName, int weightPound, int weightDecimal, int inQuantity, String inDescription) {
+    public Item( int inType, String inName, int weightPound, int weightDecimal, int inQuantity, String inDescription) {
         name = inName;
         weight = new Weight(weightPound,weightDecimal);
         description = inDescription;
         quantity = inQuantity;
         findWeightTotal();
-        type = 1;
+        type = inType;
 
     }
 
@@ -119,10 +122,7 @@ public class Item {
         if(quantity<1) {
             return false;
         }
-        if(!validType()) {
-            return false;
-        }
-        return true;
+        return validType();
     }
 
     /**
@@ -191,11 +191,11 @@ public class Item {
     /**
      * @return Type of item
      */
-    public int getType() { return type; };
+    public int getType() { return type; }
 
     /**
      * Sets Type to input parameter - for usage by subclasses
-     * @param inType
+     * @param inType The int type of the item - for changing icon/sorting
      */
     public void setType(int inType) { type = inType; }
 
@@ -232,7 +232,41 @@ public class Item {
      * @return Icon ID
      */
     public int getIcon() {
-        return R.drawable.base_item;
+
+        switch (getType()){
+            case 1:
+                return R.drawable.ic_genericicon;
+            case 2:
+                return R.drawable.ic_armoricon;
+            case 3:
+                return R.drawable.ic_armoricon2;
+            case 4:
+                return R.drawable.ic_armoricon3;
+            case 5:
+                return R.drawable.ic_weaponicon;
+            case 6:
+                return R.drawable.ic_weaponicon2;
+            case 7:
+                return R.drawable.ic_arrowicon;
+            case 8:
+                return R.drawable.ic_quivericon;
+            case 9:
+                return R.drawable.ic_foodicon;
+            case 10:
+                return R.drawable.ic_potionicon;
+            case 11:
+                return R.drawable.ic_pouchicon;
+            case 12:
+                return R.drawable.ic_coinicon;
+            case 13:
+                return R.drawable.ic_gemicon;
+            case 14:
+                return R.drawable.ic_articon;
+            case 15:
+                return R.drawable.ic_specialicon;
+        }
+        setType(1);
+        return R.drawable.ic_genericicon;
     }
 
     /**
@@ -241,10 +275,10 @@ public class Item {
      * @return Whether type is valid
      */
     public boolean validType() {
-        if(type==1) {
-            return true;
+        if(type>MAX_TYPE||type<0) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     /**
@@ -259,6 +293,8 @@ public class Item {
             weightTotal=weight;
         }
     }
+
+
 
 
 }

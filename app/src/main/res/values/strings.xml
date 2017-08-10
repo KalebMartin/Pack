@@ -13,5 +13,20 @@
     <string name="new_item">New Item</string>
     <string name="item_name">Item Name</string>
     <string name="unit_abbr">lbs</string>
+    <string name="sort_dialog_title">Select Sort Parameters</string>
+    <string name="sort_positive">Sort Items</string>
+    <string name="cancel">Cancel</string>
+
+    <string-array name="item_sort_options">
+        <item>Type</item>
+        <item>Type-Reverse</item>
+        <item>Name</item>
+        <item>Name-Reverse)</item>
+        <item>Lightest</item>
+        <item>Heaviest</item>
+        <item>Newest</item>
+        <item>Oldest</item>
+
+    </string-array>
 
 </resources>

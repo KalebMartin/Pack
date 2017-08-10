@@ -34,6 +34,7 @@ public class ItemView extends AppCompatActivity {
         Log.d("ItemView", "Item succesfully loaded");
 
         TextView nameTitle = (TextView) findViewById(R.id.title);
+        nameTitle.setCompoundDrawablesWithIntrinsicBounds(item.getIcon(),0,item.getIcon(),0);
         TextView weight = (TextView) findViewById(R.id.weight);
         TextView totalWeight = (TextView) findViewById(R.id.total_weight);
         TextView quantity = (TextView) findViewById(R.id.quantity);
